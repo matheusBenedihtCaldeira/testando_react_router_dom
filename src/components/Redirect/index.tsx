@@ -9,10 +9,17 @@ export const Redirect = () =>{
 
     useEffect(() => {
         clearTimeout(timeout.current);
+
         timeout.current = setTimeout(() => {
-            setTime((t) => t - 1)
+            setTime(t => t - 1);
         }, 1000)
-    }, [time])
+        if(time <= 0){
+            navigate('/')
+        }
+        return () => {
+            clearTimeout(timeout.current)
+        }
+    }, [time]);
 
     return(
         <div>
